@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import backgroundImage from "../assets/images/real-estate-white-graphics-design-qr9394ynnogt96or.jpg"
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -12,7 +14,12 @@ const Signup = () => {
     // Add signup logic here
   };
  return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
+    <Container className="d-flex justify-content-center align-items-center vh-100"
+      style={{
+        background: `url(${backgroundImage}) no-repeat center center fixed`,
+        backgroundSize: "cover",
+      }}
+    >
       <Card style={{ width: "25rem" }} className="p-4 shadow">
         <h3 className="text-center">Sign Up</h3>
         <Form onSubmit={handleSignup}>
