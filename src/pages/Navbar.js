@@ -13,6 +13,8 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/research">Research & Insights</Nav.Link>
 
+            
+
             {/* Profile Dropdown */}
             <NavDropdown title="Profile" id="profile-dropdown">
               <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
