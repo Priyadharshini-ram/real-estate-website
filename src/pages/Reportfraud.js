@@ -54,7 +54,7 @@ const ReportFraud = () => {
               />
             </Form.Group>
 
-            <Button variant="danger" type="submit" className="w-100 mt-3">
+            <Button variant="danger" type="submit" className=" mt-3">
               Submit Report
             </Button>
           </Form>

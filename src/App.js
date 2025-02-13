@@ -17,6 +17,12 @@ import HelpCenter from "./pages/Helpcenter";
 import Transactions from "./pages/Transactions";
 import Research from "./pages/Research";
 
+
+
+
+
+
+
 const App = () => {
   return (
     <Router>
@@ -36,7 +42,8 @@ const App = () => {
         <Route path="/report-fraud" element={<ReportFraud />} />
         <Route path="/help-center" element={<HelpCenter />} />
         <Route path="/transactions" element={<Transactions />} />
-        <Route path="/research" element={<Research />} /> 
+        <Route path="/research" element={<Research />} />
+     
 
 
 
