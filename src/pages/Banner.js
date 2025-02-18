@@ -46,7 +46,7 @@ const Banner = () => {
           </Row>
         </Form>
 
-        {/* Buy, Sell, Rent Buttons */}
+        {/* Buy, Sell, Rent, Land/Plot Buttons */}
         <Row className="justify-content-center mt-4">
           <Col xs="auto">
             <Button variant="primary" size="lg" href="/buy">
@@ -61,6 +61,11 @@ const Banner = () => {
           <Col xs="auto">
             <Button variant="warning" size="lg" href="/rent">
               Rent
+            </Button>  
+          </Col>
+          <Col xs="auto">
+            <Button variant="info" size="lg" href="/landplot">
+              Land/Plot
             </Button>
           </Col>
         </Row>
