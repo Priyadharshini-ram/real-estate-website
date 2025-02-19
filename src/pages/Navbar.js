@@ -12,6 +12,13 @@ const Navigation = () => {
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/research">Research & Insights</Nav.Link>
+            <Nav.Link as={Link} to="/services">Services</Nav.Link>
+            <Nav.Link href="/map">Map</Nav.Link>
+            
+
+
+            
+
 
             
 
@@ -26,7 +33,6 @@ const Navigation = () => {
 
             {/* Settings Dropdown */}
             <NavDropdown title="Settings" id="settings-dropdown">
-              <NavDropdown.Item as={Link} to="/services">Services</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/about">About Us</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/contact">Contact Us</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/report-fraud">Report a Fraud</NavDropdown.Item>

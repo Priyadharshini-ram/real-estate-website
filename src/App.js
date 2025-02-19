@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"; 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Buy from "./pages/Buy";
@@ -18,6 +18,10 @@ import Reviews from "./pages/Reviews";
 import Activity from "./pages/Activity";
 import NavigationBar from "./pages/Navbar"; // Navigation Bar
 import Footer from "./components/Footer"; // Footer
+import MapSection from "./pages/MapSection"; // Added MapSection
+import Everything from "./pages/Everything";
+import LandPlot from "./pages/LandPlot";
+
 
 function App() {
   return (
@@ -41,6 +45,12 @@ function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/map" element={<MapSection />} /> {/* New route for the map */}
+          <Route path="/everything" element={<Everything />} />
+          <Route path="/land-plot" element={<LandPlot />} />
+
+
+          
         </Routes>
       </div>
 
