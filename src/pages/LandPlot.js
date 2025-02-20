@@ -1,142 +1,123 @@
 import React, { useState, useEffect } from "react";
-import { Card, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
 
 const LandPlot = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedPlot, setSelectedPlot] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const [expandedPlot, setExpandedPlot] = useState(null);
 
-  const [landPlots, setLandPlots] = useState([
+  const [plots, setPlots] = useState([
     {
       id: 1,
-      title: "Spacious Farm Land",
-      price: "$50,000",
-      location: "Texas",
-      size: "5 acres",
-      image: "farm_land.jpg",
-      video: "farm_land.mp4",
-      lat: 31.9686,
-      lng: -99.9018,
+      title: "Spacious Residential Plot",
+      price: "$150,000",
+      location: "San Francisco, CA",
+      image: "residential-plot.jpg",
+      video: "residential-plot.mp4",
+      lat: 37.7749,
+      lng: -122.4194,
+      description: "A prime residential plot in the heart of San Francisco, ideal for building your dream home with scenic city views."
     },
     {
       id: 2,
-      title: "Commercial Plot",
-      price: "$120,000",
-      location: "New York",
-      size: "2 acres",
-      image: "commercial_plot.jpg",
-      video: "commercial_plot.mp4",
-      lat: 40.7128,
-      lng: -74.0060,
+      title: "Commercial Land",
+      price: "$300,000",
+      location: "Dallas, TX",
+      image: "commercial-land.jpg",
+      video: "commercial-land.mp4",
+      lat: 32.7767,
+      lng: -96.7970,
+      description: "Strategically located commercial land, perfect for businesses looking to establish their presence in a bustling area."
     },
     {
       id: 3,
-      title: "Residential Plot",
-      price: "$80,000",
-      location: "California",
-      size: "3 acres",
-      image: "residential_plot.jpg",
-      video: "residential_plot.mp4",
-      lat: 36.7783,
-      lng: -119.4179,
-    },
+      title: "Farmland for Sale",
+      price: "$100,000",
+      location: "Nashville, TN",
+      image: "farmland.jpg",
+      video: "farmland.mp4",
+      lat: 36.1627,
+      lng: -86.7816,
+      description: "Expansive farmland suitable for agriculture or a countryside retreat. Peaceful surroundings with fertile soil."
+    }
   ]);
 
   useEffect(() => {
-    // Fetch land/plot listings from an API or database
-    // Example: fetch('/api/lands').then(res => res.json()).then(data => setLandPlots(data));
+    // Fetch land plot listings from an API or database if needed
   }, []);
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  const handleShowVideo = (plot) => {
-    setSelectedPlot(plot);
-    setShowModal(true);
+  const handlePlotClick = (id) => {
+    setExpandedPlot(expandedPlot === id ? null : id); // Toggle expansion
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedPlot(null);
-  };
-
-  const filteredLandPlots = landPlots.filter(
-    (plot) =>
-      plot.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      plot.location.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredPlots = plots.filter((plot) =>
+    plot.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center mb-4">Find Land & Plots for Sale</h2>
+    <Container className="mt-5">
+      <h2 className="text-center mb-4">Explore Available Land & Plots</h2>
 
-      <input
+      <Form.Control
         type="text"
         placeholder="Search by title or location..."
         value={searchQuery}
         onChange={handleSearch}
-        className="form-control mb-4"
+        className="mb-4"
       />
 
-      <div className="row">
-        {filteredLandPlots.length > 0 ? (
-          filteredLandPlots.map((plot) => (
-            <div key={plot.id} className="col-md-4 mb-4">
-              <Card className="shadow-sm">
-                <Card.Img
-                  variant="top"
-                  src={plot.image}
-                  alt={plot.title}
-                  className="object-cover"
-                  style={{ height: "200px" }}
-                />
+      <Row>
+        {filteredPlots.length > 0 ? (
+          filteredPlots.map((plot) => (
+            <Col md={4} key={plot.id} className="mb-4">
+              <Card 
+                onClick={() => handlePlotClick(plot.id)} 
+                style={{ cursor: "pointer" }}
+              >
+                <Card.Img variant="top" src={plot.image} alt={plot.title} />
                 <Card.Body>
                   <Card.Title>{plot.title}</Card.Title>
                   <Card.Text>
                     <strong>Location:</strong> {plot.location}
-                    <br />
-                    <strong>Size:</strong> {plot.size}
-                    <br />
-                    <strong>Price:</strong> <span className="text-primary">{plot.price}</span>
                   </Card.Text>
-                  <Button variant="primary" onClick={() => handleShowVideo(plot)}>
-                    Watch Video
-                  </Button>
+                  <Card.Text>
+                    <strong>Price:</strong> {plot.price}
+                  </Card.Text>
 
-                  {/* Google Map */}
-                  <iframe
-                    width="100%"
-                    height="200"
-                    frameBorder="0"
-                    style={{ border: 0, marginTop: "10px", borderRadius: "8px" }}
-                    src={`https://maps.google.com/maps?q=${plot.lat},${plot.lng}&hl=es&z=14&output=embed`}
-                    allowFullScreen
-                  ></iframe>
+                  {expandedPlot === plot.id && (
+                    <>
+                      {/* Plot Description */}
+                      <p className="text-muted">{plot.description}</p>
+
+                      {/* Video Tour */}
+                      <video width="100%" controls className="rounded">
+                        <source src={plot.video} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+
+                      {/* Google Map */}
+                      <iframe
+                        width="100%"
+                        height="200"
+                        frameBorder="0"
+                        style={{ border: 0, marginTop: "10px", borderRadius: "8px" }}
+                        src={`https://maps.google.com/maps?q=${plot.lat},${plot.lng}&hl=es&z=14&output=embed`}
+                        allowFullScreen
+                      ></iframe>
+                    </>
+                  )}
                 </Card.Body>
               </Card>
-            </div>
+            </Col>
           ))
         ) : (
-          <p className="text-center text-gray-500">No land/plots found.</p>
+          <p className="text-center text-gray-500">No land plots found.</p>
         )}
-      </div>
-
-      {/* Video Modal */}
-      <Modal show={showModal} onHide={handleCloseModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedPlot?.title} - Video Tour</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedPlot && (
-            <video width="100%" controls>
-              <source src={selectedPlot.video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )}
-        </Modal.Body>
-      </Modal>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

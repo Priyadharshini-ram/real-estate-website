@@ -1,65 +1,62 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { FaChartLine, FaCalculator, FaNewspaper, FaGlobe } from "react-icons/fa";
 
 const Research = () => {
   return (
     <Container className="mt-5">
-      <h2 className="text-center mb-4">Real Estate Research & Insights</h2>
-      <Row>
+      <h2 className="text-center mb-4">📊 Real Estate Research & Insights</h2>
+
+      {/* Horizontal Scrollable Row */}
+      <div className="d-flex flex-row flex-nowrap overflow-auto gap-3 p-2">
         {/* Market Trends Section */}
-        <Col sm={12} md={6} lg={4} className="mb-4">
-          <Card className="shadow">
-            <Card.Body>
-              <Card.Title>Market Trends</Card.Title>
-              <Card.Text>
-                Discover the latest trends in the real estate market. We provide up-to-date insights into property values, rental yields, and future forecasts.
-              </Card.Text>
-              <Button variant="primary" href="/market-trends">View Trends</Button>
-            </Card.Body>
-          </Card>
-        </Col>
+        <Card className="shadow text-center flex-shrink-0" style={{ width: "300px" }}>
+          <Card.Body className="d-flex flex-column">
+            <FaChartLine size={40} className="mb-3 text-primary" />
+            <Card.Title>Market Trends</Card.Title>
+            <Card.Text className="flex-grow-1">
+              Discover the latest real estate market trends, including property values and forecasts.
+            </Card.Text>
+            <Button variant="primary" href="/market-trends">View Trends</Button>
+          </Card.Body>
+        </Card>
 
         {/* Property Valuation Section */}
-        <Col sm={12} md={6} lg={4} className="mb-4">
-          <Card className="shadow">
-            <Card.Body>
-              <Card.Title>Property Valuation</Card.Title>
-              <Card.Text>
-                Get insights into property valuation, including how to determine the market value of a property and tips on improving property value.
-              </Card.Text>
-              <Button variant="primary" href="/property-valuation">Learn More</Button>
-            </Card.Body>
-          </Card>
-        </Col>
+        <Card className="shadow text-center flex-shrink-0" style={{ width: "300px" }}>
+          <Card.Body className="d-flex flex-column">
+            <FaCalculator size={40} className="mb-3 text-primary" />
+            <Card.Title>Property Valuation</Card.Title>
+            <Card.Text className="flex-grow-1">
+              Learn how to determine market value and get tips on increasing property worth.
+            </Card.Text>
+            <Button variant="primary" href="/property-valuation">Learn More</Button>
+          </Card.Body>
+        </Card>
 
         {/* Expert Articles Section */}
-        <Col sm={12} md={6} lg={4} className="mb-4">
-          <Card className="shadow">
-            <Card.Body>
-              <Card.Title>Expert Articles</Card.Title>
-              <Card.Text>
-                Read expert articles on a variety of real estate topics, including investment advice, buying/selling tips, and more.
-              </Card.Text>
-              <Button variant="primary" href="/articles">Browse Articles</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+        <Card className="shadow text-center flex-shrink-0" style={{ width: "300px" }}>
+          <Card.Body className="d-flex flex-column">
+            <FaNewspaper size={40} className="mb-3 text-primary" />
+            <Card.Title>Expert Articles</Card.Title>
+            <Card.Text className="flex-grow-1">
+              Access articles on investment strategies, buying/selling tips, and market insights.
+            </Card.Text>
+            <Button variant="primary" href="/articles">Browse Articles</Button>
+          </Card.Body>
+        </Card>
 
-      {/* Featured Insights Section */}
-      <Row className="mt-5">
-        <Col sm={12} md={6}>
-          <Card className="shadow">
-            <Card.Body>
-              <Card.Title>Featured Insight: 2025 Property Market Forecast</Card.Title>
-              <Card.Text>
-                An in-depth analysis of what the real estate market is expected to look like in 2025. Find out what areas are expected to see growth.
-              </Card.Text>
-              <Button variant="primary" href="/2025-forecast">Read Full Report</Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+        {/* 2025 Forecast Section */}
+        <Card className="shadow text-center flex-shrink-0" style={{ width: "300px" }}>
+          <Card.Body className="d-flex flex-column">
+            <FaGlobe size={50} className="mb-3 text-success" />
+            <Card.Title>🌍 2025 Property Market Forecast</Card.Title>
+            <Card.Text className="flex-grow-1">
+              Discover which areas will see the most growth in 2025.
+            </Card.Text>
+            <Button variant="success" href="/2025-forecast">Read Full Report</Button>
+          </Card.Body>
+        </Card>
+      </div>
     </Container>
   );
 };

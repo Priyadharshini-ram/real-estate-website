@@ -6,6 +6,7 @@ import Everything from "./Everything";
 import Counter from "./Counter";
 import RealEstateHighlights from "./RealEstateHighlights";
 import SearchAgents from "./SearchAgents"; // Import SearchAgents Component
+import Research from "./Research"; // ✅ Import Research.js
 
 const Banner = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -81,16 +82,17 @@ const Banner = () => {
       {/* Everything Section */}
       <Everything />
 
-      {/* Counter Section */}
-      <Counter />
+      {/* Research Section (Moved Here) ✅ */}
+      <Research />
 
-      
-      {/* Search Agents Section (Added Below RealEstateHighlights) */}
+      {/* Search Agents Section */}
       <SearchAgents />
+
+      {/* Counter Section (Moved Below SearchAgents) ✅ */}
+      <Counter />
 
       {/* Real Estate Highlights Section */}
       <RealEstateHighlights />
-
     </>
   );
 };
