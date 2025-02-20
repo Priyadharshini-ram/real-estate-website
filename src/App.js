@@ -5,7 +5,7 @@ import Buy from "./pages/Buy";
 import Sell from "./pages/Sell";
 import Rent from "./pages/Rent";
 import Transactions from "./pages/Transactions";
-import Services from "./pages/Services"; // Fixed route name
+import Services from "./pages/Services";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import HelpCenter from "./pages/HelpCenter";
@@ -21,7 +21,8 @@ import Footer from "./components/Footer"; // Footer
 import MapSection from "./pages/MapSection"; // Added MapSection
 import Everything from "./pages/Everything";
 import LandPlot from "./pages/LandPlot";
-
+import ChatBot from "./pages/ChatBot"; // ✅ AI Chatbot Component
+import Shortlisted from "./pages/Shortlisted"; // ✅ Import Shortlisted Page
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Route path="/sell" element={<Sell />} />
           <Route path="/rent" element={<Rent />} />
           <Route path="/transactions" element={<Transactions />} />
-          <Route path="/services" element={<Services />} /> {/* Fixed "/services" */}
+          <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/help-center" element={<HelpCenter />} />
@@ -45,15 +46,15 @@ function App() {
           <Route path="/research" element={<Research />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/map" element={<MapSection />} /> {/* New route for the map */}
+          <Route path="/map" element={<MapSection />} />
           <Route path="/everything" element={<Everything />} />
           <Route path="/land-plot" element={<LandPlot />} />
-
-
-          
+          <Route path="/shortlisted" element={<Shortlisted />} /> {/* ✅ New Route */}
         </Routes>
       </div>
 
+      <ChatBot /> {/* ✅ AI Chatbot Component */}
+      
       <Footer /> {/* Footer at the bottom */}
     </Router>
   );

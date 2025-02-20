@@ -58,7 +58,7 @@ const Reviews = () => {
               onChange={handleInputChange}
             />
           </Form.Group>
-          <Button variant="primary" onClick={addReview} className="w-100">
+          <Button variant="primary" onClick={addReview} className="w-20">
             Submit Review
           </Button>
           

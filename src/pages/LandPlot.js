@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { FaHeart } from "react-icons/fa";
 
 const LandPlot = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedPlot, setExpandedPlot] = useState(null);
+  const [shortlisted, setShortlisted] = useState([]);
 
   const [plots, setPlots] = useState([
     {
@@ -42,7 +44,9 @@ const LandPlot = () => {
   ]);
 
   useEffect(() => {
-    // Fetch land plot listings from an API or database if needed
+    // Load shortlisted plots from local storage
+    const savedShortlist = JSON.parse(localStorage.getItem("shortlistedPlots")) || [];
+    setShortlisted(savedShortlist);
   }, []);
 
   const handleSearch = (e) => {
@@ -50,7 +54,20 @@ const LandPlot = () => {
   };
 
   const handlePlotClick = (id) => {
-    setExpandedPlot(expandedPlot === id ? null : id); // Toggle expansion
+    setExpandedPlot(expandedPlot === id ? null : id);
+  };
+
+  const toggleShortlist = (plot) => {
+    let updatedShortlist;
+    if (shortlisted.some((item) => item.id === plot.id)) {
+      // Remove from shortlist if already added
+      updatedShortlist = shortlisted.filter((item) => item.id !== plot.id);
+    } else {
+      // Add to shortlist
+      updatedShortlist = [...shortlisted, plot];
+    }
+    setShortlisted(updatedShortlist);
+    localStorage.setItem("shortlistedPlots", JSON.stringify(updatedShortlist));
   };
 
   const filteredPlots = plots.filter((plot) =>
@@ -61,12 +78,12 @@ const LandPlot = () => {
     <Container className="mt-5">
       <h2 className="text-center mb-4">Explore Available Land & Plots</h2>
 
-      <Form.Control
+      <input
         type="text"
         placeholder="Search by title or location..."
         value={searchQuery}
         onChange={handleSearch}
-        className="mb-4"
+        className="form-control mb-4"
       />
 
       <Row>
@@ -75,8 +92,24 @@ const LandPlot = () => {
             <Col md={4} key={plot.id} className="mb-4">
               <Card 
                 onClick={() => handlePlotClick(plot.id)} 
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", position: "relative" }}
               >
+                {/* Heart Icon for Shortlist */}
+                <FaHeart 
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: shortlisted.some((item) => item.id === plot.id) ? "red" : "gray",
+                    fontSize: "20px",
+                    cursor: "pointer"
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent card click event
+                    toggleShortlist(plot);
+                  }}
+                />
+
                 <Card.Img variant="top" src={plot.image} alt={plot.title} />
                 <Card.Body>
                   <Card.Title>{plot.title}</Card.Title>
@@ -89,16 +122,13 @@ const LandPlot = () => {
 
                   {expandedPlot === plot.id && (
                     <>
-                      {/* Plot Description */}
                       <p className="text-muted">{plot.description}</p>
 
-                      {/* Video Tour */}
                       <video width="100%" controls className="rounded">
                         <source src={plot.video} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
 
-                      {/* Google Map */}
                       <iframe
                         width="100%"
                         height="200"

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { FaHeart } from "react-icons/fa";
 
 const Rent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedProperty, setExpandedProperty] = useState(null);
+  const [shortlisted, setShortlisted] = useState([]);
 
   const [properties, setProperties] = useState([
     {
@@ -42,7 +44,9 @@ const Rent = () => {
   ]);
 
   useEffect(() => {
-    // Fetch rental property listings from an API or database
+    // Load shortlisted properties from local storage
+    const savedShortlist = JSON.parse(localStorage.getItem("shortlistedRent")) || [];
+    setShortlisted(savedShortlist);
   }, []);
 
   const handleSearch = (e) => {
@@ -50,7 +54,20 @@ const Rent = () => {
   };
 
   const handlePropertyClick = (id) => {
-    setExpandedProperty(expandedProperty === id ? null : id); // Toggle expansion
+    setExpandedProperty(expandedProperty === id ? null : id);
+  };
+
+  const toggleShortlist = (property) => {
+    let updatedShortlist;
+    if (shortlisted.some((item) => item.id === property.id)) {
+      // Remove from shortlist if already added
+      updatedShortlist = shortlisted.filter((item) => item.id !== property.id);
+    } else {
+      // Add to shortlist
+      updatedShortlist = [...shortlisted, property];
+    }
+    setShortlisted(updatedShortlist);
+    localStorage.setItem("shortlistedRent", JSON.stringify(updatedShortlist));
   };
 
   const filteredProperties = properties.filter((property) =>
@@ -61,12 +78,12 @@ const Rent = () => {
     <Container className="mt-5">
       <h2 className="text-center mb-4">Find Rental Properties</h2>
 
-      <Form.Control
+      <input
         type="text"
         placeholder="Search by title or location..."
         value={searchQuery}
         onChange={handleSearch}
-        className="mb-4"
+        className="form-control mb-4"
       />
 
       <Row>
@@ -75,8 +92,24 @@ const Rent = () => {
             <Col md={4} key={property.id} className="mb-4">
               <Card 
                 onClick={() => handlePropertyClick(property.id)} 
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", position: "relative" }}
               >
+                {/* Heart Icon for Shortlist */}
+                <FaHeart 
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    right: "10px",
+                    color: shortlisted.some((item) => item.id === property.id) ? "red" : "gray",
+                    fontSize: "20px",
+                    cursor: "pointer"
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent card click event
+                    toggleShortlist(property);
+                  }}
+                />
+
                 <Card.Img variant="top" src={property.image} alt={property.title} />
                 <Card.Body>
                   <Card.Title>{property.title}</Card.Title>
@@ -89,16 +122,13 @@ const Rent = () => {
 
                   {expandedProperty === property.id && (
                     <>
-                      {/* Property Description */}
                       <p className="text-muted">{property.description}</p>
 
-                      {/* Video Tour */}
                       <video width="100%" controls className="rounded">
                         <source src={property.video} type="video/mp4" />
                         Your browser does not support the video tag.
                       </video>
 
-                      {/* Google Map */}
                       <iframe
                         width="100%"
                         height="200"
