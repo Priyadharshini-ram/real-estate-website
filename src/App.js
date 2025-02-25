@@ -1,4 +1,4 @@
-import React from "react"; 
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Buy from "./pages/Buy";
@@ -18,44 +18,47 @@ import Reviews from "./pages/Reviews";
 import Activity from "./pages/Activity";
 import NavigationBar from "./pages/Navbar"; // Navigation Bar
 import Footer from "./components/Footer"; // Footer
-import MapSection from "./pages/MapSection"; // Added MapSection
+import MapSection from "./pages/MapSection";
 import Everything from "./pages/Everything";
 import LandPlot from "./pages/LandPlot";
-import ChatBot from "./pages/ChatBot"; // ✅ AI Chatbot Component
-import Shortlisted from "./pages/Shortlisted"; // ✅ Import Shortlisted Page
+import ChatBot from "./pages/ChatBot";  // ✅ Import ChatBot
+import Shortlisted from "./pages/Shortlisted"; 
 
 function App() {
   return (
     <Router>
-      <NavigationBar /> {/* Navbar at the top */}
-      
-      <div className="container mt-4">
-        <Routes>
-          <Route path="/" element={<Banner />} />
-          <Route path="/reviews" element={<Reviews />} />
-          <Route path="/activity" element={<Activity />} />
-          <Route path="/buy" element={<Buy />} />
-          <Route path="/sell" element={<Sell />} />
-          <Route path="/rent" element={<Rent />} />
-          <Route path="/transactions" element={<Transactions />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/help-center" element={<HelpCenter />} />
-          <Route path="/report-fraud" element={<ReportFraud />} />
-          <Route path="/research" element={<Research />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/map" element={<MapSection />} />
-          <Route path="/everything" element={<Everything />} />
-          <Route path="/land-plot" element={<LandPlot />} />
-          <Route path="/shortlisted" element={<Shortlisted />} /> {/* ✅ New Route */}
-        </Routes>
-      </div>
+      <div className="d-flex flex-column min-vh-100">
+        <NavigationBar /> {/* Navbar at the top */}
 
-      <ChatBot /> {/* ✅ AI Chatbot Component */}
-      
-      <Footer /> {/* Footer at the bottom */}
+        {/* Main content area */}
+        <div className="flex-grow-1 position-relative">
+          <Routes>
+            <Route path="/" element={<Banner />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/activity" element={<Activity />} />
+            <Route path="/buy" element={<Buy />} />
+            <Route path="/sell" element={<Sell />} />
+            <Route path="/rent" element={<Rent />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/help-center" element={<HelpCenter />} />
+            <Route path="/report-fraud" element={<ReportFraud />} />
+            <Route path="/research" element={<Research />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/map" element={<MapSection />} />
+            <Route path="/everything" element={<Everything />} />
+            <Route path="/land-plot" element={<LandPlot />} />
+            <Route path="/shortlisted" element={<Shortlisted />} />
+          </Routes>
+        </div>
+
+        <ChatBot /> {/* ✅ Add ChatBot here so it appears on every page */}
+        
+        <Footer /> {/* Footer at the bottom */}
+      </div>
     </Router>
   );
 }

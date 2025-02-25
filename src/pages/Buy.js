@@ -11,40 +11,28 @@ const Buy = () => {
     {
       id: 1,
       title: "Luxury Villa",
-      price: "$500,000",
-      location: "New York",
-      image: "villa.jpg",
-      video: "villa.mp4",
-      lat: 40.7128,
-      lng: -74.0060,
-      description: "A stunning luxury villa featuring spacious interiors, a private pool, and breathtaking city views. Ideal for upscale living."
+      price: "Rs 50,00,000",
+      location: "Trichy",
+      image: "/assets/images/buy1.jpg", // ✅ Using public folder
+      video: "/assets/videos/villa.mp4",
+      lat: 10.7905,
+      lng: 78.7047,
+      description: "A stunning luxury villa featuring spacious interiors and peaceful views. Ideal for happy living."
     },
     {
       id: 2,
-      title: "Modern Apartment",
-      price: "$300,000",
-      location: "Los Angeles",
-      image: "apartment.jpg",
-      video: "apartment.mp4",
-      lat: 34.0522,
-      lng: -118.2437,
-      description: "A sleek and modern apartment located in the heart of LA, offering high-end amenities and easy access to entertainment hubs."
-    },
-    {
-      id: 3,
-      title: "Cozy Cottage",
-      price: "$200,000",
-      location: "Texas",
-      image: "cottage.jpg",
-      video: "cottage.mp4",
-      lat: 31.9686,
-      lng: -99.9018,
-      description: "A charming countryside cottage surrounded by lush greenery, perfect for a peaceful retreat or vacation home."
+      title: "Modern Villa",
+      price: "Rs 35,00,000",
+      location: "Madurai",
+      image: "/assets/images/buy2.jpg", // ✅ Using public folder
+      video: "/assets/videos/apartment.mp4",
+      lat: 9.9252,
+      lng: 78.1198,
+      description: "A simple and elegant house with great facilities."
     }
   ]);
 
   useEffect(() => {
-    // Load shortlisted properties from local storage
     const savedShortlist = JSON.parse(localStorage.getItem("shortlisted")) || [];
     setShortlisted(savedShortlist);
   }, []);
@@ -60,10 +48,8 @@ const Buy = () => {
   const toggleShortlist = (property) => {
     let updatedShortlist;
     if (shortlisted.some((item) => item.id === property.id)) {
-      // Remove from shortlist if already added
       updatedShortlist = shortlisted.filter((item) => item.id !== property.id);
     } else {
-      // Add to shortlist
       updatedShortlist = [...shortlisted, property];
     }
     setShortlisted(updatedShortlist);
@@ -94,7 +80,7 @@ const Buy = () => {
                 onClick={() => handlePropertyClick(property.id)} 
                 style={{ cursor: "pointer", position: "relative" }}
               >
-                {/* Heart Icon with Clickable Functionality */}
+                {/* Heart Icon for Shortlist */}
                 <FaHeart 
                   style={{
                     position: "absolute",
@@ -105,12 +91,13 @@ const Buy = () => {
                     cursor: "pointer"
                   }}
                   onClick={(e) => {
-                    e.stopPropagation(); // Prevent card click event
+                    e.stopPropagation(); // Prevents triggering card click
                     toggleShortlist(property);
                   }}
                 />
 
                 <Card.Img variant="top" src={property.image} alt={property.title} />
+
                 <Card.Body>
                   <Card.Title>{property.title}</Card.Title>
                   <Card.Text>

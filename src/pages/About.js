@@ -1,26 +1,37 @@
 import React from "react";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
-import aboutImage from "../assets/images/aboutus.jpg"; // Ensure the image exists in this path
+import aboutImage from "../assets/images/about-us.webp"; // Ensure the image exists in this path
 
 const About = () => {
   return (
     <Container className="mt-5">
       <h2 className="text-center mb-4">About Us</h2>
       <p className="text-center">
-        Welcome to <strong>RealEstate</strong>, your trusted partner in buying, selling, and renting properties.  
+        Welcome to <strong>Premium Properties</strong>, your trusted partner in buying, selling, and renting properties.
         We are committed to delivering exceptional service with integrity and expertise.
       </p>
 
-      <Row className="align-items-center">
-        <Col md={6}>
-          <Image src={aboutImage} alt="About Us" fluid rounded className="shadow" />
+      {/* Image & Content Section */}
+      <Row className="align-items-stretch">
+        {/* Image Section */}
+        <Col xs={12} md={6} className="d-flex">
+          <Image
+            src={aboutImage}
+            alt="About Us"
+            fluid
+            rounded
+            className="shadow w-100"
+            style={{ minHeight: "100%", objectFit: "cover" }}
+          />
         </Col>
-        <Col md={6}>
-          <Card className="shadow p-4">
+
+        {/* Content Section */}
+        <Col xs={12} md={6} className="d-flex">
+          <Card className="shadow p-4 w-100 d-flex flex-column justify-content-center">
             <Card.Body>
               <Card.Title>🏡 Who We Are</Card.Title>
               <Card.Text>
-                Established in [Year], <strong>RealEstate</strong> has grown into a leading real estate agency  
+                Established in 2010, <strong>Premium Properties</strong> has grown into a leading real estate agency  
                 known for its professional and customer-centric approach. Our team consists of experienced  
                 real estate agents, legal advisors, and property consultants who ensure a smooth real estate journey.
               </Card.Text>
@@ -44,6 +55,7 @@ const About = () => {
         </Col>
       </Row>
 
+      {/* Meet Our Team Section */}
       <Row className="mt-5">
         <Col>
           <h3 className="text-center">Meet Our Team</h3>
@@ -57,7 +69,9 @@ const About = () => {
                 <Card.Body>
                   <Card.Title>👨‍💼 John Doe</Card.Title>
                   <Card.Subtitle>Founder & CEO</Card.Subtitle>
-                  <Card.Text>With 15+ years of experience in real estate, John leads our company with passion and expertise.</Card.Text>
+                  <Card.Text>
+                    With 15+ years of experience in real estate, John leads our company with passion and expertise.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -66,7 +80,9 @@ const About = () => {
                 <Card.Body>
                   <Card.Title>👩‍💼 Jane Smith</Card.Title>
                   <Card.Subtitle>Lead Property Consultant</Card.Subtitle>
-                  <Card.Text>Jane specializes in luxury properties and helps clients find their perfect homes.</Card.Text>
+                  <Card.Text>
+                    Jane specializes in luxury properties and helps clients find their perfect homes.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
@@ -75,7 +91,9 @@ const About = () => {
                 <Card.Body>
                   <Card.Title>📜 Michael Johnson</Card.Title>
                   <Card.Subtitle>Legal Advisor</Card.Subtitle>
-                  <Card.Text>Michael ensures all legal aspects of property transactions are handled with precision.</Card.Text>
+                  <Card.Text>
+                    Michael ensures all legal aspects of property transactions are handled with precision.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
