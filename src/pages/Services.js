@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
+import "../components/styles.css";
 
 const Services = () => {
   return (
@@ -16,9 +17,8 @@ const Services = () => {
           <Card className="shadow">
             <Card.Body>
               <Card.Title>🏡 Buying Assistance</Card.Title>
-              <Card.Text>
-                Find your dream home with our expert guidance. We provide market insights, property visits,  
-                and negotiation support to get you the best deal.
+              <Card.Text className="para-justify">
+                Find your dream home with our guidance. We provide insights, property visits, and negotiation support to get you the best deal.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -29,9 +29,8 @@ const Services = () => {
           <Card className="shadow">
             <Card.Body>
               <Card.Title>💰 Selling Support</Card.Title>
-              <Card.Text>
-                Sell your property quickly and at the best price. We handle property listing, marketing,  
-                and buyer negotiations for a smooth selling process.
+              <Card.Text className="para-justify">
+                Sell your property quickly and at the best price. We handle listing, marketing, and buyer negotiations for a smooth selling process.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -42,7 +41,7 @@ const Services = () => {
           <Card className="shadow">
             <Card.Body>
               <Card.Title>🏢 Renting Solutions</Card.Title>
-              <Card.Text>
+              <Card.Text className="para-justify">
                 Looking for a rental property? We offer a wide range of verified rental options that  
                 suit your budget and lifestyle.
               </Card.Text>
@@ -55,9 +54,8 @@ const Services = () => {
           <Card className="shadow">
             <Card.Body>
               <Card.Title>🔑 Property Management</Card.Title>
-              <Card.Text>
-                Our property management services take care of everything from tenant screening to maintenance,  
-                ensuring hassle-free ownership for landlords.
+              <Card.Text className="para-justify">
+                Our property management services handle everything from screening to maintenance, ensuring hassle-free ownership for landlords.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -68,7 +66,7 @@ const Services = () => {
           <Card className="shadow">
             <Card.Body>
               <Card.Title>📜 Legal & Documentation</Card.Title>
-              <Card.Text>
+              <Card.Text className="para-justify">
                 Get assistance with legal paperwork, title verification, and documentation to ensure a  
                 smooth and legally compliant transaction.
               </Card.Text>
@@ -81,7 +79,7 @@ const Services = () => {
           <Card className="shadow">
             <Card.Body>
               <Card.Title>🏦 Home Loan Assistance</Card.Title>
-              <Card.Text>
+              <Card.Text className="para-justify">
                 We help you find the best home loan options with low-interest rates and easy repayment plans  
                 through trusted financial partners.
               </Card.Text>

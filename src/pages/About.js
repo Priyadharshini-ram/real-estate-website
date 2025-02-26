@@ -63,14 +63,14 @@ const About = () => {
             Our team of skilled professionals is dedicated to helping you make informed real estate decisions.
           </p>
           
-          <Row className="g-4 text-center">
+          <Row className="g-4">
             <Col md={4}>
               <Card className="shadow">
                 <Card.Body>
-                  <Card.Title>👨‍💼 John Doe</Card.Title>
-                  <Card.Subtitle>Founder & CEO</Card.Subtitle>
+                  <Card.Title className="text-center">👨‍💼 John Doe</Card.Title>
+                  <Card.Subtitle className="text-center">Founder & CEO</Card.Subtitle>
                   <Card.Text>
-                    With 15+ years of experience in real estate, John leads our company with passion and expertise.
+                    With 15+ years of experience in real estate, John leads our company with passion and expertise. As our CEO, he drives innovation and ensures exceptional service in every transaction.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -78,10 +78,10 @@ const About = () => {
             <Col md={4}>
               <Card className="shadow">
                 <Card.Body>
-                  <Card.Title>👩‍💼 Jane Smith</Card.Title>
-                  <Card.Subtitle>Lead Property Consultant</Card.Subtitle>
+                  <Card.Title className="text-center">👩‍💼 Jane Smith</Card.Title>
+                  <Card.Subtitle className="text-center">Lead Property Consultant</Card.Subtitle>
                   <Card.Text>
-                    Jane specializes in luxury properties and helps clients find their perfect homes.
+                    Jane specializes in luxury properties and helps clients find their perfect homes with ease and expertise. As our lead property consultant, she offers personalized guidance to match clients with their ideal properties.
                   </Card.Text>
                 </Card.Body>
               </Card>
@@ -89,10 +89,10 @@ const About = () => {
             <Col md={4}>
               <Card className="shadow">
                 <Card.Body>
-                  <Card.Title>📜 Michael Johnson</Card.Title>
-                  <Card.Subtitle>Legal Advisor</Card.Subtitle>
-                  <Card.Text>
-                    Michael ensures all legal aspects of property transactions are handled with precision.
+                  <Card.Title className="text-center">📜 Michael Johnson</Card.Title>
+                  <Card.Subtitle className="text-center">Legal Advisor</Card.Subtitle>
+                  <Card.Text style={{ textAlign: "justify" }}>
+                    Michael ensures all legal aspects of property transactions are handled with precision and utmost professionalism. As our legal advisor, he provides expert guidance to ensure compliance and smooth transactions.
                   </Card.Text>
                 </Card.Body>
               </Card>
