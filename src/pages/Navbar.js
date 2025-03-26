@@ -1,8 +1,17 @@
 import React from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = localStorage.getItem("authToken") !== null;
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // ✅ Remove token
+    navigate("/login"); // ✅ Redirect to Login page
+    window.location.reload(); // ✅ Reload to update UI
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -16,11 +25,18 @@ const Navigation = () => {
 
             {/* Profile Dropdown */}
             <NavDropdown title="Profile" id="profile-dropdown">
-              <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/activity">Activity</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/reviews">Reviews</NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/transactions">Transactions</NavDropdown.Item> 
-              <NavDropdown.Item as={Link} to="/shortlisted">Shortlisted</NavDropdown.Item> {/* ✅ Added Shortlisted */}
+              {!isAuthenticated ? (
+                <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
+              ) : (
+                <>
+                  <NavDropdown.Item as={Link} to="/activity">Activity</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/reviews">Reviews</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/transactions">Transactions</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/shortlisted">Shortlisted</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item> {/* ✅ Logout Option */}
+                </>
+              )}
             </NavDropdown>
 
             {/* Settings Dropdown */}

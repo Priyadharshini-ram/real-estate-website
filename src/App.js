@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Buy from "./pages/Buy";
 import Sell from "./pages/Sell";
@@ -21,46 +21,71 @@ import Footer from "./components/Footer"; // Footer
 import MapSection from "./pages/MapSection";
 import Everything from "./pages/Everything";
 import LandPlot from "./pages/LandPlot";
-import ChatBot from "./pages/ChatBot";  // ✅ Import ChatBot
-import Shortlisted from "./pages/Shortlisted"; 
+import ChatBot from "./pages/ChatBot";
+import Shortlisted from "./pages/Shortlisted";
 
 function App() {
   return (
     <Router>
-      <div className="d-flex flex-column min-vh-100">
-        <NavigationBar /> {/* Navbar at the top */}
-
-        {/* Main content area */}
-        <div className="flex-grow-1 position-relative">
-          <Routes>
-            <Route path="/" element={<Banner />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/activity" element={<Activity />} />
-            <Route path="/buy" element={<Buy />} />
-            <Route path="/sell" element={<Sell />} />
-            <Route path="/rent" element={<Rent />} />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/help-center" element={<HelpCenter />} />
-            <Route path="/report-fraud" element={<ReportFraud />} />
-            <Route path="/research" element={<Research />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/map" element={<MapSection />} />
-            <Route path="/everything" element={<Everything />} />
-            <Route path="/land-plot" element={<LandPlot />} />
-            <Route path="/shortlisted" element={<Shortlisted />} />
-          </Routes>
-        </div>
-
-        <ChatBot /> {/* ✅ Add ChatBot here so it appears on every page */}
-        
-        <Footer /> {/* Footer at the bottom */}
-      </div>
+      <MainContent />
     </Router>
   );
 }
+
+// ✅ Function to check authentication status
+const isAuthenticated = () => {
+  return localStorage.getItem("authToken") !== null;
+};
+
+// ✅ Component for protecting routes
+const ProtectedRoute = ({ element }) => {
+  return isAuthenticated() ? element : <Navigate to="/login" />;
+};
+
+// ✅ Main Layout with Authentication Check
+const MainContent = () => {
+  const location = useLocation();
+
+  return (
+    <div className="d-flex flex-column min-vh-100">
+      {/* Show Navbar only if user is logged in */}
+      {isAuthenticated() && <NavigationBar />}
+
+      {/* Main content */}
+      <div className="flex-grow-1 position-relative">
+        <Routes>
+          {/* ✅ Redirect to Login if not authenticated */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+          {/* ✅ Protect all routes except login/signup */}
+          <Route path="/" element={<ProtectedRoute element={<Banner />} />} />
+          <Route path="/reviews" element={<ProtectedRoute element={<Reviews />} />} />
+          <Route path="/activity" element={<ProtectedRoute element={<Activity />} />} />
+          <Route path="/buy" element={<ProtectedRoute element={<Buy />} />} />
+          <Route path="/sell" element={<ProtectedRoute element={<Sell />} />} />
+          <Route path="/rent" element={<ProtectedRoute element={<Rent />} />} />
+          <Route path="/transactions" element={<ProtectedRoute element={<Transactions />} />} />
+          <Route path="/services" element={<ProtectedRoute element={<Services />} />} />
+          <Route path="/about" element={<ProtectedRoute element={<About />} />} />
+          <Route path="/contact" element={<ProtectedRoute element={<Contact />} />} />
+          <Route path="/help-center" element={<ProtectedRoute element={<HelpCenter />} />} />
+          <Route path="/report-fraud" element={<ProtectedRoute element={<ReportFraud />} />} />
+          <Route path="/research" element={<ProtectedRoute element={<Research />} />} />
+          <Route path="/map" element={<ProtectedRoute element={<MapSection />} />} />
+          <Route path="/everything" element={<ProtectedRoute element={<Everything />} />} />
+          <Route path="/land-plot" element={<ProtectedRoute element={<LandPlot />} />} />
+          <Route path="/shortlisted" element={<ProtectedRoute element={<Shortlisted />} />} />
+        </Routes>
+      </div>
+
+      {/* Show ChatBot only on Home page */}
+      {location.pathname === "/" && isAuthenticated() && <ChatBot />}
+
+      {/* Show Footer only if user is logged in */}
+      {isAuthenticated() && <Footer />}
+    </div>
+  );
+};
 
 export default App;
